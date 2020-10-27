@@ -5,8 +5,6 @@ AUTHOR:       Eric Phung
 CREATED:      10/26/2020 02:28 PM
 */
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { Button, View, Text, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // screens
@@ -19,11 +17,12 @@ const Stack = createStackNavigator();
 function AppStack() {
   return (
     <Stack.Navigator initialRouteName="Welcome">
-       <Stack.Screen
+      <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}
         options={
           {
+            gestureEnabled: false,
             title: '',
             // title: null,
             headerLeft: null,
@@ -45,10 +44,10 @@ function AppStack() {
         name="Results"
         component={ResultsScreen}
         options={
-         {
+        {
           title: '',
           headerLeft: null,
-         }
+        }
        }
       />
     </Stack.Navigator>

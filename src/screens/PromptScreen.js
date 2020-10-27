@@ -57,19 +57,17 @@ function PromptScreen({ navigation, route }) {
 
   const [correctAnswer, setCorrectAnswer] = useState(null);
 
-
   // props
   const { cardId, data, results } = route.params;
   // console.log('data[cardId].question: ', data[cardId].question);
 
   // Navigation methods
   const showResultsScreen = () => {
-    // console.log('results.answers.length: ', results.answers.length);
-    // console.log('data.length: ', data.length);
     navigation.push('Results', {
-    data,
-    results,
-  })};
+      data,
+      results,
+    });
+  };
   const showNextPromptScreen = () => {
     // alert(cardId + 1);
     if (cardId + 1 < global.MAX_QUESTIONS_PER_ROUND) {
@@ -78,31 +76,23 @@ function PromptScreen({ navigation, route }) {
         cardId: cardId + 1,
         data,
         results,
-      });  
+      });
     } else {
       showResultsScreen();
     }
   };
   const submitBtnPressed = () => {
-    // verify answer
-    
-
+    // verify selected answer
     if (selectedAnswer) {
       results.answers[cardId] = selectedAnswer;
     } else {
       results.answers[cardId] = {
         id: cardId,
         title: '',
-      }
+      };
     }
-
-    // alert(selectedAnswer.title);
-    // alert(data[cardId].correct)
-
     if (data[cardId].correct === selectedAnswer.title) {
       // PLAYER WAS RIGHT
-      // alert('message?: DOMString')
-      // user's answer is correct, continue on
       setCorrectAnswer(data[cardId].correct);
     } else {
       // PLAYER WAS WRONG
@@ -110,11 +100,6 @@ function PromptScreen({ navigation, route }) {
 
       // user's answer is wrong, display correct one
     }
-
-    // alert(JSON.stringify(selectedAnswer, ["title"], 1));
-
-    // show correct answer to user
-
     // // navigate to next screen
     // if (cardId >= data.length - 1) {
     //   // if end of list, show results screen to user
@@ -127,7 +112,7 @@ function PromptScreen({ navigation, route }) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button onPress={() => navigation.replace('Welcome')} title="Quit" />
+        <Button onPress={() => navigation.replace('Welcome')} title="New Game" />
       ),
     });
   }, [navigation]);
@@ -175,34 +160,44 @@ function PromptScreen({ navigation, route }) {
       />
       {/* SUBMIT BUTTON */}
       {
-        !correctAnswer && <TouchableOpacity style={{
-          flex: 1,
-          justifyContent: 'center',
-          margin: 24,
-          width: '80%',
-          borderRadius: 12,
-          alignItems: 'center',
-          borderWidth: 1,
-          borderColor: 'black',
-          borderStyle: 'solid',
-        }} onPress={submitBtnPressed}>
-          <Text style={styles.btnText}>Submit</Text>
-        </TouchableOpacity>
+        !correctAnswer && (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              margin: 24,
+              width: '80%',
+              borderRadius: 12,
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: 'black',
+              borderStyle: 'solid',
+            }}
+            onPress={submitBtnPressed}
+          >
+            <Text style={styles.btnText}>Submit</Text>
+          </TouchableOpacity>
+        )
       }
       {
-        correctAnswer && <TouchableOpacity style={{
-          flex: 1,
-          justifyContent: 'center',
-          margin: 24,
-          width: '80%',
-          borderRadius: 12,
-          alignItems: 'center',
-          borderWidth: 1,
-          borderColor: 'black',
-          borderStyle: 'solid',
-        }} onPress={showNextPromptScreen}>
-          <Text style={styles.btnText}>Next Question</Text>
-        </TouchableOpacity>
+        correctAnswer && (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              margin: 24,
+              width: '80%',
+              borderRadius: 12,
+              alignItems: 'center',
+              borderWidth: 1,
+              borderColor: 'black',
+              borderStyle: 'solid',
+            }}
+            onPress={showNextPromptScreen}
+          >
+            <Text style={styles.btnText}>Next Question</Text>
+          </TouchableOpacity>
+        )
       }
     </View>
   );

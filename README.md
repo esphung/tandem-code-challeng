@@ -34,24 +34,22 @@ We would also like to see a README which includes any information about how to r
 ### Code Solution
 
 > ##### Notes
-- Javascript solution
-- Swift solution
+- Expo app code challenge solution ✓
 - Add README ✓
 - Clean code
 - Good Documentation
 - Minimal libraries
-- Consistent UI's
 
 > ##### Data UML
 > [Lucidchart Diagram](https://lucid.app/invitations/accept/3b02e706-9b17-4c52-bdc0-7a361f8490a6)
 
 > ##### Process
 > 1. Develop documentation ✓
-> 2. DDevelope app designs by data and functional requirements ✓
-> 3. Develop user interface
-> 4. Develop app logic
+> 2. Develope app designs by data and functional requirements ✓
+> 3. Develop user interface ✓
+> 4. Develop app logic ✓
 > 5. Clean up code and documentation
-> 6. Deploy submission
+> 6. Submit solution
 
 > ##### Requirements
 > nodejs ✓

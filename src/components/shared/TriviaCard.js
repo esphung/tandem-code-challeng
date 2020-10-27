@@ -12,7 +12,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import MultipleChoiceList from 'components/TriviaCard/MultipleChoiceList';
+import MultipleChoiceList from 'components/Prompt/MultipleChoiceList';
 
 const styles = StyleSheet.create({
   northPanel: {

@@ -18,6 +18,7 @@ import data from 'data/trivias.json';
 
 // import functions
 import uuidv4 from 'functions/uuidv4';
+import shuffle from 'functions/shuffle';
 
 // shared components
 import Heading from 'components/shared/Heading';
@@ -40,25 +41,6 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
 });
-
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
 
 function WelcomeScreen({ navigation }) {
   const [answers, setAnswers] = useState([]);
@@ -89,7 +71,8 @@ You can select only 1 answer out of the 4 possible answers${'\n'}
 The correct answer will be revealed after you submit your answer${'\n'}
 You can see your score at the end of the round${'\n'}
 Questions will not repeat in a round${'\n'}
-`} />
+`}
+      />
       <View>
         <Button
           title="Start Game"
@@ -109,10 +92,9 @@ Questions will not repeat in a round${'\n'}
               cardId: 0,
               data: questions,
               results,
-            })}
-          }
+            });
+          }}
         />
-
         <Text style={styles.text}>
           Developed by Eric Phung
           {'\n'}

@@ -1,8 +1,11 @@
-// global app data
+/*
+FILENAME:     globals.js
+PURPOSE:      stores global app values
+AUTHOR:       Eric Phung
+CREATED:      date
+*/
 
 import app from './app.json';
-
-// console.log('app: ', app);
 
 global.appVersion = app.expo.version;
 

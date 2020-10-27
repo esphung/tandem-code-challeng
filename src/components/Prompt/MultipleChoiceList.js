@@ -1,3 +1,9 @@
+/*
+FILENAME:     MultipleChoices.js
+PURPOSE:      component that shows llist of answers to user
+AUTHOR:       Eric Phung
+CREATED:      10/27/2020 02:19 AM
+*/
 import React from 'react';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -39,10 +45,6 @@ const checkedCircleIcon = <MaterialIcons style={styles.icon} name="radio-button-
 
 const uncheckedCircleIcon = <MaterialIcons style={styles.icon} name="radio-button-unchecked" size={24} color="black" />;
 
-const selectedBackgroundColor = '#6e3b6e';
-
-const unselectedBackgroundColor = selectedBackgroundColor + '40' // '#f9c2ff';
-
 const Item = ({
   item,
   onPress,
@@ -56,9 +58,18 @@ const Item = ({
   // //   // borderColor = 'green'
   // // }
   const view = (
-    <TouchableOpacity disabled={correctAnswer} onPress={onPress} style={[styles.item, style, {
-      borderColor: item.title === correctAnswer && correctAnswer ? '#0bf446' : 'gray',
-    }]}>
+    <TouchableOpacity
+      disabled={correctAnswer}
+      onPress={onPress}
+      style={
+        [
+          styles.item, style,
+          {
+            borderColor: item.title === correctAnswer && correctAnswer ? '#0bf446' : 'gray',
+          },
+        ]
+      }
+    >
       {
         isSelected ? checkedCircleIcon : uncheckedCircleIcon
       }
@@ -74,12 +85,11 @@ const MultipleChoiceList = ({
   selectedAnswer,
   correctAnswer,
 }) => {
-
   // list methods
   const renderItem = ({ item }) => {
     const itemPressed = () => setSelectedAnswer(item);
-    // const backgroundColor = item.id === selectedAnswer.id ? selectedBackgroundColor : unselectedBackgroundColor;
-    const isSelected = item.id === selectedAnswer.id 
+
+    const isSelected = item.id === selectedAnswer.id;
     const view = (
       <Item
         item={item}
