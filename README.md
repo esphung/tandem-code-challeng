@@ -43,9 +43,7 @@ We would also like to see a README which includes any information about how to r
 - Consistent UI's
 
 > ##### Data UML
-> [Lucidchart Diagram](https://lucid.app/lucidchart/fe7e9250-48b6-46f8-a482-12f014afcbbe/edit?beaconFlowId=93B2C5F418D7CA3C&page=0_0#?folder_id=home&browser=icon)
-> 
-![Alt text](/images/Screen Shot 2020-10-27 at 1.57.19 AM.png?raw=true "Optional Title")
+> [Lucidchart Diagram](https://lucid.app/invitations/accept/3b02e706-9b17-4c52-bdc0-7a361f8490a6)
 
 > ##### Process
 > 1. Develop documentation ✓
