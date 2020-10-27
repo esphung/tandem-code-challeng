@@ -11,35 +11,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import {
   FlatList,
   SafeAreaView,
-  // StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    // backgroundColor: 'seagreen',
-    // marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 8,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 18,
-    flex: 1,
-    color: 'black',
-  },
-  icon: {
-    marginHorizontal: 10,
-  },
-});
+import styles from 'styles/Prompt';
 
 const checkedCircleIcon = <MaterialIcons style={styles.icon} name="radio-button-checked" size={24} color="black" />;
 
@@ -110,7 +86,7 @@ const MultipleChoiceList = ({
     return view;
   };
   const view = (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.multipleChoiceContainer}>
       <FlatList
         scrollEnabled={false}
         data={listData}

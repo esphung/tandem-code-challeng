@@ -2,10 +2,11 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   Button,
   TouchableOpacity,
 } from 'react-native';
+
+import styles from 'styles/Prompt';
 
 // shared components
 import Heading from 'components/shared/Heading';
@@ -24,27 +25,6 @@ const getListData = (list) => {
   });
   return result;
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'lightblue', // '#ecf0f1',
-    padding: 8,
-    paddingTop: 50,
-  },
-  text: {
-    margin: 24,
-    fontSize: 18,
-    // fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  btnText: {
-    fontSize: 18,
-    // fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
 
 // VIEW COMPONENT DEFINITION BEGINS HERE
 function PromptScreen({ navigation, route }) {
@@ -162,17 +142,7 @@ function PromptScreen({ navigation, route }) {
       {
         !correctAnswer && (
           <TouchableOpacity
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              margin: 24,
-              width: '80%',
-              borderRadius: 12,
-              alignItems: 'center',
-              borderWidth: 1,
-              borderColor: 'black',
-              borderStyle: 'solid',
-            }}
+            style={styles.btn}
             onPress={submitBtnPressed}
           >
             <Text style={styles.btnText}>Submit</Text>
@@ -182,17 +152,7 @@ function PromptScreen({ navigation, route }) {
       {
         correctAnswer && (
           <TouchableOpacity
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              margin: 24,
-              width: '80%',
-              borderRadius: 12,
-              alignItems: 'center',
-              borderWidth: 1,
-              borderColor: 'black',
-              borderStyle: 'solid',
-            }}
+            style={styles.btn}
             onPress={showNextPromptScreen}
           >
             <Text style={styles.btnText}>Next Question</Text>

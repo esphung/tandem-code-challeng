@@ -8,36 +8,16 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   Button,
 } from 'react-native';
+
+import styles from 'styles/Results';
 
 // shared components
 import Heading from 'components/shared/Heading';
 import Instructions from 'components/shared/Instructions';
 
 import ListView from 'components/Results/ListView';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: 'skyblue', // '#ecf0f1',
-    padding: 8,
-    paddingTop: 50,
-  },
-  text: {
-    margin: 24,
-    fontSize: 18,
-    // fontWeight: 'bold',
-    textAlign: 'center',
-
-    // borderWidth: 1,
-    // borderColor: 'red',
-    // borderStyle: 'solid',
-  },
-});
 
 const getCorrectAnswers = (data, results) => {
   // alert('message?: DOMString')

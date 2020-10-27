@@ -8,9 +8,10 @@ import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   Button,
 } from 'react-native';
+
+import styles from 'styles/Welcome';
 
 // import data
 import data from 'data/trivias.json';
@@ -23,24 +24,6 @@ import shuffle from 'functions/shuffle';
 // shared components
 import Heading from 'components/shared/Heading';
 import Instructions from 'components/shared/Instructions';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'lightblue', // '#ecf0f1',
-    padding: 8,
-    paddingTop: 50,
-  },
-  text: {
-    margin: 24,
-    fontSize: 18,
-    // fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'gray',
-  },
-});
 
 function WelcomeScreen({ navigation }) {
   const [answers, setAnswers] = useState([]);
