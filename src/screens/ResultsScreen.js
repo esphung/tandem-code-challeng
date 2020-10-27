@@ -17,18 +17,20 @@ import styles from 'styles/Results';
 import Heading from 'components/shared/Heading';
 import Instructions from 'components/shared/Instructions';
 
+// screen components
 import ListView from 'components/Results/ListView';
 
+// compares lists by items with matching key values
 const getCorrectAnswers = (data, results) => {
   // console.log('results.answers: ', results.answers);
   const correctAnswers = data.filter((question, index) => {
     if (data[index].correct === results.answers[index].title) return results.answers[index];
-
     return null;
   });
   return correctAnswers;
 };
 
+// helper function, formats data for list view
 const getListData = (questions, results) => {
   const result = questions.map((question, index) => ({
     id: index,
@@ -38,12 +40,14 @@ const getListData = (questions, results) => {
   return result;
 };
 
+// begin component def
 function ResultsScreen({ navigation, route }) {
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [answers] = useState(route.params ? route.params.results : []);
   const [questions] = useState(route.params ? route.params.data : []);
   const [listData, setListData] = useState([]);
 
+  // set header button
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -58,6 +62,7 @@ function ResultsScreen({ navigation, route }) {
     setListData(getListData(questions, answers));
   }, []);
 
+  // render component
   const view = (
     <View style={styles.container}>
       <Heading title="You are finished, good job!" />
@@ -83,6 +88,6 @@ function ResultsScreen({ navigation, route }) {
     </View>
   );
   return view;
-}
+} // end component def
 
 export default ResultsScreen;

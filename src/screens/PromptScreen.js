@@ -11,8 +11,10 @@ import styles from 'styles/Prompt';
 // shared components
 import Heading from 'components/shared/Heading';
 
+// screen components
 import TriviaCard from 'components/shared/TriviaCard';
 
+// helper function, formats data for list view
 const getListData = (list) => {
   const result = list.map((element, index) => {
     // give item an id and assign it's value property as the element
@@ -25,11 +27,8 @@ const getListData = (list) => {
   });
   return result;
 };
-
 // VIEW COMPONENT DEFINITION BEGINS HERE
 function PromptScreen({ navigation, route }) {
-  // console.log('route.params.results: ', route.params.results);
-
   // state
   const [selectedAnswer, setSelectedAnswer] = useState('');
 
@@ -37,11 +36,10 @@ function PromptScreen({ navigation, route }) {
 
   const [correctAnswer, setCorrectAnswer] = useState(null);
 
-  // props
+  // passed props
   const { cardId, data, results } = route.params;
-  // console.log('data[cardId].question: ', data[cardId].question);
 
-  // Navigation methods
+  // navigation methods
   const showResultsScreen = () => {
     navigation.push('Results', {
       data,
@@ -61,10 +59,11 @@ function PromptScreen({ navigation, route }) {
       showResultsScreen();
     }
   };
+
+  // action methods
   const submitBtnPressed = () => {
     // add answer to user's selected answers
     results.answers[cardId] = selectedAnswer;
-
     // verify selected answer
     if (!selectedAnswer) {
       results.answers[cardId] = {
@@ -72,24 +71,13 @@ function PromptScreen({ navigation, route }) {
         title: '',
       };
     }
-    // console.log('results.answers: ', results.answers);
     if (data[cardId].correct === selectedAnswer.title) {
       // PLAYER WAS RIGHT
       setCorrectAnswer(data[cardId].correct);
     } else {
       // PLAYER WAS WRONG
       setCorrectAnswer(data[cardId].correct);
-
-      // user's answer is wrong, display correct one
     }
-    // // navigate to next screen
-    // if (cardId >= data.length - 1) {
-    //   // if end of list, show results screen to user
-    //   showResultsScreen();
-    // } else {
-    //   // else, show user next question
-    //   showNextPromptScreen();
-    // }
   };
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -98,31 +86,16 @@ function PromptScreen({ navigation, route }) {
       ),
     });
   }, [navigation]);
-  // when previous user answer or answer changes
-  // useEffect(() => {
-  //   // record new answer
-  //   if (selectedAnswer) {
-  //     results.answers[cardId] = selectedAnswer;
-  //   } else {
-  //     results.answers[cardId] = {
-  //       id: cardId,
-  //       title: '',
-  //     }
-  //   }
-  //   // console.log('results.answers: ', results.answers);
-  // }, [selectedAnswer]);
-  // when trivia item changes
   useEffect(() => {
     // global.MAX_QUESTIONS_PER_ROUND
     if (cardId >= global.MAX_QUESTIONS_PER_ROUND) showResultsScreen();
+
     // combine answers to be displayed
     const answers = data[cardId].incorrect.concat(data[cardId].correct);
 
     // parse answers into list data format
     setListData(getListData(answers));
 
-    // set any previously chosen player answers
-    // console.log('results.answers[cardId]: ', results.answers[cardId]);
     if (results.answers[cardId] && results.answers[cardId].title !== '') setSelectedAnswer(results.answers[cardId]);
   }, [cardId]);
   const view = (

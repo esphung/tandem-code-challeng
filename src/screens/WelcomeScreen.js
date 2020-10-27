@@ -25,9 +25,12 @@ import shuffle from 'functions/shuffle';
 import Heading from 'components/shared/Heading';
 import Instructions from 'components/shared/Instructions';
 
+// begin component def
 function WelcomeScreen({ navigation }) {
   const [answers, setAnswers] = useState([]);
+
   const [questions, setQuestions] = useState([]);
+
   // component did mount
   useEffect(() => {
     // set 10 (or global limit of) questions per round
@@ -38,11 +41,9 @@ function WelcomeScreen({ navigation }) {
       // return item
       list.push(item);
     });
-
     setQuestions(list);
 
     setAnswers([]);
-    // alert(global.MAX_QUESTIONS_PER_ROUND)
   }, []);
   const view = (
     <View style={styles.container}>
@@ -89,6 +90,6 @@ Questions will not repeat in a round${'\n'}
     </View>
   );
   return view;
-}
+} // end component def
 
 export default WelcomeScreen;
