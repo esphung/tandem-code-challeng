@@ -20,7 +20,7 @@ import Instructions from 'components/shared/Instructions';
 import ListView from 'components/Results/ListView';
 
 const getCorrectAnswers = (data, results) => {
-  // alert('message?: DOMString')
+  // console.log('results.answers: ', results.answers);
   const correctAnswers = data.filter((question, index) => {
     if (data[index].correct === results.answers[index].title) return results.answers[index];
 

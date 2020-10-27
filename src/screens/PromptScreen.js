@@ -62,15 +62,17 @@ function PromptScreen({ navigation, route }) {
     }
   };
   const submitBtnPressed = () => {
+    // add answer to user's selected answers
+    results.answers[cardId] = selectedAnswer;
+
     // verify selected answer
-    if (selectedAnswer) {
-      results.answers[cardId] = selectedAnswer;
-    } else {
+    if (!selectedAnswer) {
       results.answers[cardId] = {
         id: cardId,
         title: '',
       };
     }
+    // console.log('results.answers: ', results.answers);
     if (data[cardId].correct === selectedAnswer.title) {
       // PLAYER WAS RIGHT
       setCorrectAnswer(data[cardId].correct);
