@@ -31,7 +31,7 @@ Created:    10/26/2020 11:31 AM
 > # <!-- SETUP DONE -->
 > 
 > ##### other build commands
-> ```shell
+>
 > # remove previous *.lock files and packages
 > $ make clean
 > 
@@ -40,7 +40,6 @@ Created:    10/26/2020 11:31 AM
 > 
 > # run this command to start up the app
 > $ expo start
-> ```
 > ```
 
 > ##### Development Process
