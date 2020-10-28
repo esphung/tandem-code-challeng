@@ -28,10 +28,10 @@ Created:    10/26/2020 11:31 AM
 > # fresh install packages, build and run
 > $ make
 > 
-> # <!-- SETUP DONE -->
-> 
+>  # <!-- SETUP DONE -->
+> ```
 > ##### other build commands
->
+> ```shell
 > # remove previous *.lock files and packages
 > $ make clean
 > 
@@ -39,10 +39,10 @@ Created:    10/26/2020 11:31 AM
 > $ make build
 > 
 > # run this command to start up the app
-> $ expo start
+> $ make run
 > ```
 
-> ##### Development Process
+> ##### my development Process
 > 1. Developed documentation ✓
 > 2. Developed app designs by data and functional requirements ✓
 > 3. Developed user interface ✓
