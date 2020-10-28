@@ -7,6 +7,11 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+*.lock
+ios/
+android/
+
+.expo/
 
 # macOS
 .DS_Store

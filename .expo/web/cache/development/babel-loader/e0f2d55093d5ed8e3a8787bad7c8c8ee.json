@@ -1,1 +1,0 @@
-{"ast":null,"code":"import app from \"./app.json\";","map":{"version":3,"sources":["/Users/ericphung/Desktop/tandem/expo-app-solution/globals.js"],"names":["app"],"mappings":"AAEA,OAAOA,GAAP","sourcesContent":["// global app data\n\nimport app from './app.json';\n// console.log('app: ', app);\n"]},"metadata":{},"sourceType":"module"}

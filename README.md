@@ -2,23 +2,45 @@
 Apprentice Software Engineer | October 2020
 
 > Purpose:  Code challenge solutions for apprenticeship  
-Author:     Eric Phung  
+Developer:     Eric Phung  
 Created:    10/26/2020 11:31 AM
 
-### Code Challenge Submission
-
-> ##### UML Diagrams
-> [Lucidchart Diagram](https://lucid.app/invitations/accept/3b02e706-9b17-4c52-bdc0-7a361f8490a6)
-
+### Challenge Submission
+> [Lucidchart UML Diagrams](https://lucid.app/invitations/accept/3b02e706-9b17-4c52-bdc0-7a361f8490a6)
 > ##### Package Requirements
 > nodejs ✓
 > expo ✓
+> iOS simulator/device and/or Android simulator/device ✓
+> ##### Other Requirements
 > iOS simulator/device, or Android simulator/device ✓
 
-> ##### Setup and Install
+> ##### new setup and install
 > ```shell
-> # run make in your terminal
-> make
+> # pull down the repository
+> $ git clone https://github.com/esphung/tandem-code-challeng.git
+> 
+> # move to the root directory of the new folder
+> $ cd tandem-code-challeng
+> 
+> # check if you have Expo installed
+> $ which expo-cli && expo --version
+> 
+> # fresh install packages, build and run
+> $ make
+> 
+> # <!-- SETUP DONE -->
+> 
+> ##### other build commands
+> ```shell
+> # remove previous *.lock files and packages
+> $ make clean
+> 
+> # run this command to clean and install new packages
+> $ make build
+> 
+> # run this command to start up the app
+> $ expo start
+> ```
 > ```
 
 > ##### Development Process
