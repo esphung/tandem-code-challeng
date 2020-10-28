@@ -14,7 +14,7 @@ import Heading from 'components/shared/Heading';
 // screen components
 import TriviaCard from 'components/shared/TriviaCard';
 
-// helper function, formats data for list view
+// helper function, formats trivia for list view
 const getListData = (list) => {
   const result = list.map((element, index) => {
     // give item an id and assign it's value property as the element
@@ -31,37 +31,32 @@ const getListData = (list) => {
 function PromptScreen({ navigation, route }) {
   // state
   const [selectedAnswer, setSelectedAnswer] = useState('');
-
   const [listData, setListData] = useState([]);
-
   const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [questions, setQuestions] = useState([]);
 
   // passed props
-  const { cardId, data, results } = route.params;
+  const { cardId, trivia, results } = route.params;
 
-  // navigation methods
-  const showResultsScreen = () => {
-    navigation.push('Results', {
-      data,
-      results,
-    });
-  };
+  // navigation
+  const showResultsScreen = () => navigation.push('Results', {
+    trivia: questions,
+    results,
+  });
   const showNextPromptScreen = () => {
-    // alert(cardId + 1);
+    // show next page
     if (cardId + 1 < global.MAX_QUESTIONS_PER_ROUND) {
-      // show next page
       navigation.push('Prompt', {
         cardId: cardId + 1,
-        data,
+        trivia: questions,
         results,
       });
     } else {
+      // show results to player
       showResultsScreen();
     }
   };
-
-  // action methods
-  const submitBtnPressed = () => {
+  const recordUserResponse = () => {
     // add answer to user's selected answers
     results.answers[cardId] = selectedAnswer;
     // verify selected answer
@@ -71,14 +66,17 @@ function PromptScreen({ navigation, route }) {
         title: '',
       };
     }
-    if (data[cardId].correct === selectedAnswer.title) {
+    // display EXPECTED answer in green (or not)
+    if (questions[cardId].correct === selectedAnswer.title) {
       // PLAYER WAS RIGHT
-      setCorrectAnswer(data[cardId].correct);
+      setCorrectAnswer(questions[cardId].correct);
     } else {
       // PLAYER WAS WRONG
-      setCorrectAnswer(data[cardId].correct);
+      setCorrectAnswer(questions[cardId].correct);
     }
   };
+  // event triggers
+  const submitBtnPressed = () => recordUserResponse();
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -87,13 +85,14 @@ function PromptScreen({ navigation, route }) {
     });
   }, [navigation]);
   useEffect(() => {
+    setQuestions(trivia);
     // global.MAX_QUESTIONS_PER_ROUND
     if (cardId >= global.MAX_QUESTIONS_PER_ROUND) showResultsScreen();
 
     // combine answers to be displayed
-    const answers = data[cardId].incorrect.concat(data[cardId].correct);
+    const answers = trivia[cardId].incorrect.concat(trivia[cardId].correct);
 
-    // parse answers into list data format
+    // parse answers into list trivia format
     setListData(getListData(answers));
 
     if (results.answers[cardId] && results.answers[cardId].title !== '') setSelectedAnswer(results.answers[cardId]);
@@ -103,7 +102,7 @@ function PromptScreen({ navigation, route }) {
       {/* TRIVIA CARD */}
       <Heading title={`Question Number:${' '}${cardId + 1}`} />
       <TriviaCard
-        item={data[cardId]}
+        item={trivia[cardId]}
         selectedAnswer={selectedAnswer}
         setSelectedAnswer={setSelectedAnswer}
         cardId={cardId}
@@ -117,7 +116,15 @@ function PromptScreen({ navigation, route }) {
       {
         !correctAnswer && (
           <TouchableOpacity
-            style={styles.btn}
+            disabled={!selectedAnswer}
+            style={
+              selectedAnswer ? styles.btn : [
+                styles.btn,
+                {
+                  opacity: 0.3,
+                },
+              ]
+            }
             onPress={submitBtnPressed}
           >
             <Text style={styles.btnText}>Submit</Text>

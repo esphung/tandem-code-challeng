@@ -9,4 +9,6 @@ import app from './app.json';
 
 global.appVersion = app.expo.version;
 
+global.appDeveloperName = 'Eric Phung';
+
 global.MAX_QUESTIONS_PER_ROUND = 10;

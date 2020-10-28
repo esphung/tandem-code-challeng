@@ -10,7 +10,8 @@ export default StyleSheet.create({
     paddingTop: 50,
   },
   text: {
-    margin: 24,
+    marginHorizontal: 24,
+    marginVertical: 5,
     fontSize: 18,
     // fontWeight: 'bold',
     textAlign: 'center',

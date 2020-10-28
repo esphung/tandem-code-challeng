@@ -64,9 +64,12 @@ const Item = ({ item }) => {
 };
 
 const ListView = ({ listData }) => {
-  const renderItem = ({ item }) => (
-    <Item item={item} />
-  );
+  const renderItem = ({ item }) => {
+    if (!item.actual) return null;
+    return (
+      <Item item={item} />
+    );
+  };
 
   const view = (
     <SafeAreaView style={styles.listView}>

@@ -11,6 +11,9 @@ import {
   Button,
 } from 'react-native';
 
+// import getShortDate from 'functions/getShortDate';
+import getTimeInterval from 'functions/getTimeInterval';
+
 import styles from 'styles/Results';
 
 // shared components
@@ -21,21 +24,27 @@ import Instructions from 'components/shared/Instructions';
 import ListView from 'components/Results/ListView';
 
 // compares lists by items with matching key values
-const getCorrectAnswers = (data, results) => {
+const getCorrectAnswers = (data, answers) => {
+  // console.log('answers: ', answers);
+  // console.log('data: ', data);
   // console.log('results.answers: ', results.answers);
-  const correctAnswers = data.filter((question, index) => {
-    if (data[index].correct === results.answers[index].title) return results.answers[index];
+  const correctAnswers = answers.filter((answer, index) => {
+    if (answer.title) {
+      if (answer.title === data[index].correct) return answer;
+    }
+    // console.log(data[index].correct, answers[index]);
+    // if (answer.title === data[index].correct) return answer
     return null;
   });
   return correctAnswers;
 };
 
 // helper function, formats data for list view
-const getListData = (questions, results) => {
+const getListData = (questions, answers) => {
   const result = questions.map((question, index) => ({
     id: index,
     expected: question.correct,
-    actual: results.answers[index] ? results.answers[index].title : '',
+    actual: answers[index] ? answers[index].title : '',
   }));
   return result;
 };
@@ -43,10 +52,19 @@ const getListData = (questions, results) => {
 // begin component def
 function ResultsScreen({ navigation, route }) {
   const [correctAnswers, setCorrectAnswers] = useState([]);
-  const [answers] = useState(route.params ? route.params.results : []);
-  const [questions] = useState(route.params ? route.params.data : []);
+  const [answers, setAnswers] = useState([]);
   const [listData, setListData] = useState([]);
+  const [timeSince, setTimeSince] = useState('');
+  // passed props
+  const { results } = route.params ? route.params : {};
+  const { trivia } = route.params ? route.params : [];
 
+  function startTimer() {
+    setInterval(() => {
+      // console.log('new Date(): ', new Date());
+      setTimeSince(getTimeInterval(results.started, (new Date()).toISOString()));
+    }, 1000);
+  }
   // set header button
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -55,31 +73,47 @@ function ResultsScreen({ navigation, route }) {
       ),
     });
   }, [navigation]);
-
-  // component did mount
+  // component mounted
   useEffect(() => {
-    setCorrectAnswers(getCorrectAnswers(questions, answers));
-    setListData(getListData(questions, answers));
+    startTimer();
   }, []);
-
-  // render component
+  // results or answers mount/change
+  useEffect(() => {
+    if (results && trivia) {
+      setAnswers(results.answers);
+      setCorrectAnswers(getCorrectAnswers(trivia, results.answers));
+      setListData(getListData(trivia, results.answers));
+      results.ended = (new Date()).toISOString();
+    }
+  }, [results, answers]);
+  // render  this view component
   const view = (
     <View style={styles.container}>
       <Heading title="You are finished, good job!" />
       <Instructions title="Here are your results:" />
       <Text style={styles.text}>
+        session:
+        {' '}
+        { getTimeInterval(results.started, results.ended) }
+      </Text>
+      <Text style={styles.text}>
+        { timeSince }
+      </Text>
+      <Text style={styles.text}>
         total questions:
         {' '}
-        { questions.length }
+        { trivia.length }
       </Text>
       <Text style={styles.text}>
         correct answers:
         {' '}
-        { correctAnswers.length }
+        {
+          correctAnswers.length
+        }
         {
           correctAnswers.length > 0 ? (
             <Text style={{ opacity: 0.3 }}>
-              {` ${(((correctAnswers.length / questions.length).toFixed(2)) * 100).toFixed(2)}%`}
+              {` ${(((correctAnswers.length / trivia.length).toFixed(2)) * 100).toFixed(2)}%`}
             </Text>
           ) : null
         }

@@ -40,6 +40,8 @@ Created:    10/26/2020 11:31 AM
 > 
 > # run this command to start up the app
 > $ make run
+> # run unit tests
+> $ npm test
 > ```
 
 > ##### my development Process
